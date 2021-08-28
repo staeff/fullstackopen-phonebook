@@ -28,12 +28,10 @@ const App = () => {
 
     if (existing_names.includes(newName)) {
       alert(`${newName} is already added to the phonebook`)
-      setNewName('')
-      setNewNumber('')
+      resetNewState()
     } else {
       setPersons(persons.concat(nameObject))
-      setNewName('')
-      setNewNumber('')
+      resetNewState()
     }
   }
 
@@ -43,6 +41,11 @@ const App = () => {
 
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value)
+  }
+
+  const resetNewState = () => {
+    setNewName('')
+    setNewNumber('')
   }
 
   return (
