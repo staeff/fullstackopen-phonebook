@@ -14,6 +14,7 @@ const App = () => {
   )
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
+  let filterString = ''
 
   // function to create new name
   const addName = (event) => {
@@ -48,9 +49,16 @@ const App = () => {
     setNewNumber('')
   }
 
+  const handleFilterChange = (pat) => {
+    console.log(pat)
+    setPersons(persons.filter(person => person.name.search(pat)))
+  }
+
   return (
     <div>
       <h2>Phonebook</h2>
+      filter shown with <input type="text" value={filterString} onChange={handleFilterChange} />
+      <h2>Add new contact</h2>
       <form onSubmit={addName}>
         <div>
           name: <input  type='text' value={newName} onChange={handleNameChange} /><br />
