@@ -40,6 +40,17 @@ const App = () => {
     }
   }
 
+  const deleteName = (person) => {
+    const msg = `Delete ${person.name}?`
+    const confirm = window.confirm(msg)
+    if (confirm) {
+      personService
+        .deletePerson(person.id)
+        .then(persons =>
+          setPersons(persons)
+    )}
+  }
+
   const handleNameChange = (event) => {
     setNewName(event.target.value)
   }
@@ -78,7 +89,10 @@ const App = () => {
       <h2>Numbers</h2>
       <ul>
         {personsToShow.map(person =>
-          <Person key={person.name} person={person} />
+          <Person
+            key={person.name}
+            person={person}
+            deleteEntry={() => deleteName(person)} />
         )}
       </ul>
     </div>
