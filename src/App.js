@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Person from './components/Person'
+import InfoNotification from './components/InfoNotification'
 import personService from './services/persons'
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
+  const [ infoMessage, setInfoMessage] = useState(null)
 
   useEffect(() => {
     personService
@@ -39,6 +41,10 @@ const App = () => {
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
           resetNewState()
+          setInfoMessage(`Added ${returnedPerson.name}.`)
+          setTimeout(() => {
+            setInfoMessage(null)
+          }, 5000)
         })
     }
   }
@@ -87,6 +93,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <InfoNotification msg={infoMessage} />
       filter shown with <input type="text" value={newFilter} onChange={handleFilterChange} />
       <h2>Add new contact</h2>
       <form onSubmit={addName}>
