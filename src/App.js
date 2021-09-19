@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Person from './components/Person'
-import InfoNotification from './components/InfoNotification'
+import Notification from './components/Notification'
 import personService from './services/persons'
 
 const App = () => {
@@ -93,7 +93,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <InfoNotification msg={infoMessage} />
+      <Notification msg={infoMessage} type='info'/>
       filter shown with <input type="text" value={newFilter} onChange={handleFilterChange} />
       <h2>Add new contact</h2>
       <form onSubmit={addName}>
