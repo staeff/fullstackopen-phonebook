@@ -58,7 +58,16 @@ const App = () => {
     .update(update_id, nameObject)
     .then(returnedPerson =>
       setPersons(persons.map(person => person.id !== update_id ? person : returnedPerson))
-    )}
+    )
+    .catch(error => {
+      setSiteMessage(`Note ${nameObject.name} not found. ${error}`)
+      setSiteMessageType('error')
+      setTimeout(() => {
+        setSiteMessage(null)
+      }, 5000)
+      setPersons(persons.filter(p => p.id !== update_id))
+    })
+  }
 
   const deleteName = (person) => {
     const msg = `Delete ${person.name}?`
