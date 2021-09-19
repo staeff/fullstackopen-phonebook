@@ -8,7 +8,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
-  const [ infoMessage, setInfoMessage] = useState(null)
+  const [ siteMessage, setSiteMessage] = useState(null)
+  const [ siteMessageType, setSiteMessageType ] = useState('')
 
   useEffect(() => {
     personService
@@ -41,9 +42,10 @@ const App = () => {
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
           resetNewState()
-          setInfoMessage(`Added ${returnedPerson.name}.`)
+          setSiteMessage(`Added ${returnedPerson.name}.`)
+          setSiteMessageType('info')
           setTimeout(() => {
-            setInfoMessage(null)
+            setSiteMessage(null)
           }, 5000)
         })
     }
@@ -93,7 +95,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification msg={infoMessage} type='info'/>
+      <Notification msg={siteMessage} type={siteMessageType} />
       filter shown with <input type="text" value={newFilter} onChange={handleFilterChange} />
       <h2>Add new contact</h2>
       <form onSubmit={addName}>
